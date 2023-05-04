@@ -10,9 +10,9 @@ type ServicesType = {
 export const Services = memo<ServicesType>(({services}) => {
     return (
         <div className={c.services}>
-            {services ? services.map((service)=> {
+            {services ? services.map((service,index)=> {
                 return (
-                    <Service key={service.name} name={service.name} price={service.price}/>
+                    <Service key={index} name={service.name} price={service.price}/>
                 )
             }) : <></>}
         </div>

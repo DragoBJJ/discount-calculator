@@ -2,13 +2,16 @@
 
 import c from "../../styles/variables.module.scss"
 import {useCompanyContext} from "@/app/calculator/context/companyContext";
+import {Service} from "@/app/calculator/components/Service";
 
 export const OrderList = () => {
-    const context = useCompanyContext()
- console.log("context",context)
+    const {services} = useCompanyContext()
     return (
         <div className={c.orderList}>
-            OrderList
+            {services ? services.map((service,index)=>  {
+               return  <Service key={index} {...service}/>
+            }) : (<></>)
+            }
         </div>
     )
 }

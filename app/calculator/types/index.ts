@@ -5,7 +5,7 @@
     }
 
    export type CompanyData = {
-    ID: number,
+        ID: number,
         companyName: string
         companyOwner: string
         serviceData: Service[]
