@@ -1,28 +1,21 @@
 $primary-color: black;
 $bg-color: blanchedalmond;
-
 $hover-bg-service: #6699CC;
-
-:export {
-  primaryColor: $primary-color
-}
 
 .calculatorPage {
     display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    padding: 6rem;
+  align-content: center;
+  padding: 4rem;
    background-color: $bg-color;
     min-height: 100vh;
+  width: 100%
 }
-
 
 .services {
   display: flex;
   width: 100%;
+  max-width: 320px;
   flex-direction: column;
-  justify-content: center;
   align-content: center;
   border-radius: 1rem;
   background: $bg-color;
@@ -45,11 +38,33 @@ $hover-bg-service: #6699CC;
 &:hover {
   background: $hover-bg-service;
   transition:  0.3s;
+  }
 
+  &:hover .title {
+    color: white
+  }
+  &:hover .price {
+    color: white
   }
 
   .title {
     font-size: 16px;
     margin-bottom: 4px;
   }
+
+  .price {
+    color: black;
+  }
+}
+
+.orderList {
+  display: flex;
+  width: 100%;
+   max-width: 60%;
+  margin-left: 4rem;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid black;
+  border-radius: 1rem;
 }

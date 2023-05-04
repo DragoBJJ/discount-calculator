@@ -1,29 +1,19 @@
 import c from "../styles/variables.module.scss"
 import {Services} from "@/app/calculator/components/Services";
+import {OrderList} from "@/app/calculator/components/OrderList";
+import {companyData}  from "./data"
+import {CompanyProvider} from "@/app/calculator/context/companyContext";
 
+export default function About(){
 
-            export default function About(){
-            const servicesData: Service[] = [
-                {
-                    name: "Internet",
-                    price: 39
-                },
-                {
-                    name: "Telewizja",
-                    price: 39
-                },
-                {
-                    name: "Abonament telefoniczny",
-                    price: 39
-                },
-                {
-                    name: "Dekoder 4K",
-                    price: 39
-                }
-            ]
+    const servicesData = companyData.flatMap(({serviceData})=>serviceData)
+
             return (
                 <div  className={c.calculatorPage}>
+                    <CompanyProvider>
                         <Services services={servicesData} />
+                        <OrderList/>
+                    </CompanyProvider>
                 </div>
             )
         }
