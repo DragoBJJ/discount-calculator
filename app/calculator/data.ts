@@ -1,21 +1,73 @@
-import {CompanyData, Service} from "@/app/calculator/types";
+import {CompanyData, RabatType, ServiceType} from "@/app/calculator/types";
 
-export const servicesData: Service[] = [
+
+
+export const servicesData: ServiceType[] = [
     {
+        id: 1,
         name: "Internet",
-        price: 39
+        price:  {
+            "2023": 39,
+            "2024": 49,
+            "2025": 59
+        }
     },
     {
+        id: 2,
         name: "Telewizja",
-        price: 39
+        price:  {
+            "2023": 49,
+            "2024": 59,
+            "2025": 69
+        }
     },
     {
+        id: 3,
         name: "Abonament telefoniczny",
-        price: 39
+        price:  {
+            "2023": 29,
+            "2024": 29,
+            "2025": 29
+        }
     },
     {
+        id: 4,
         name: "Dekoder 4K",
-        price: 39
+        price:  {
+            "2023": 29,
+            "2024": 29,
+            "2025": 29
+        }
+    }
+]
+
+export const rabatsData: RabatType[] = [
+    {
+        rabat_type: "TV",
+        price: {
+            "2023": 79,
+            "2024": 89,
+            "2025": 99,
+        },
+        derivative_products_IDS: [1,2]
+    },
+    {
+        rabat_type: "ABONAMENT",
+        price: {
+            "2023": 79,
+            "2024": 89,
+            "2025": 99,
+        },
+        derivative_products_IDS: [1,3]
+    },
+    {
+        rabat_type: "DEKODER",
+        price: {
+            "2023": 79,
+            "2024": 89,
+            "2025": 99,
+        },
+        derivative_products_IDS: [1,2,4]
     }
 ]
 

@@ -6,9 +6,11 @@ import {Service} from "@/app/calculator/components/Service";
 
 export const OrderList = () => {
     const {services} = useCompanyContext()
+
     return (
         <div className={c.orderList}>
             {services ? services.map((service,index)=>  {
+
                return  <Service key={index} {...service}/>
             }) : (<></>)
             }

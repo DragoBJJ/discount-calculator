@@ -1,18 +1,18 @@
+"use client"
+
 import {memo} from "react";
 import {Service} from "@/app/calculator/components/Service";
 import c from "../../styles/variables.module.scss"
+import { ServiceTypeF} from "@/app/calculator/types";
 
 
-type ServicesType = {
-    services: Service[]
-}
 
-export const Services = memo<ServicesType>(({services}) => {
+export const Services = memo<{services: ServiceTypeF[]}>(({services}) => {
     return (
         <div className={c.services}>
             {services ? services.map((service,index)=> {
                 return (
-                    <Service key={index} name={service.name} price={service.price}/>
+                    <Service key={index} {...service}/>
                 )
             }) : <></>}
         </div>

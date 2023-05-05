@@ -1,28 +1,26 @@
 "use client"
 import {createContext, ReactNode, useContext, useState} from "react";
-import { Service} from "@/app/calculator/types";
+import { ServiceTypeF} from "@/app/calculator/types";
+
 
 
 export type CompanyContextType = {
-    ID: number,
-    companyName: string,
-    companyOwner: string,
-    services:  Service[] | []
-    setCompanyServices:(serviceData: Service[]) => void
+    services:  ServiceTypeF[] | []
+    setCompanyServices:(serviceData: ServiceTypeF[]) => void,
+    // rabat: RabatType,
+    // setRabat:  (value: (((prevState: RabatType) => RabatType) | RabatType)) => void
 }
 
 const CompanyContext = createContext<CompanyContextType | null>(null)
 
 
 export const CompanyProvider = ({children}: ReactNode) => {
-    const [companyServices,  setCompanyServices] = useState<CompanyContextType["services"]>([])
+    const [companyServices,  setCompanyServices] = useState<ServiceTypeF[] | []>([])
+    // const [rabat, setRabat] = useState<RabatType>({rabatType: "NONE", rabatPrice: 0})
     return  (
         <CompanyContext.Provider value={{
-            ID: 1,
-            companyName: "AlexanderSpace",
-            companyOwner: " Alexander",
             services: companyServices,
-            setCompanyServices
+            setCompanyServices,
         }}>
             {children}
         </CompanyContext.Provider>
