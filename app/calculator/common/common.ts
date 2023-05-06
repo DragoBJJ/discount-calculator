@@ -1,36 +1,23 @@
-import {ServiceType} from "@/app/calculator/types";
+import {ServiceType, ServiceTypeF} from "@/app/calculator/types";
+import {rabatsData} from "@/app/calculator/data";
 
+export const getCurrentRabat = (services : ServiceTypeF[]) => {
+   const currentRabats = rabatsData.filter(({derivative_products_IDS,rabat_type,price})=> {
+        const servicesIDS = services.map((service)=> service.id)
+        const isRabat: boolean = derivative_products_IDS.every((id)=> servicesIDS.includes(id))
+        return   isRabat &&  {
+            isRabat,
+            rabat_type,
+            price
+        }
+    })
+    if(currentRabats.length > 1) return currentRabats[currentRabats.length - 1]
+    return currentRabats[0]
+}
 
-// export const calculateRabat = (orders: ServiceType[]) => {
-//     if(!orders.length) return
-//   const derivativeProductsID = orders.flatMap((order)=> order.rabatProduct)
-//     const success = derivativeProductsID.reduce((acc,nextvalue) => {
-//         const index =  acc.findIndex((item) => item.rabat_type === nextvalue.rabat_type)
-//          if(index > -1) {
-//              acc[index].rabat_exist = true
-//              return acc[index]
-//          }else {
-//             acc.push({...nextvalue})
-//          }
-//    return acc
-//
-//     },[] as RabatProduct[])
-//     console.log("Success",success)
-//     return  success
-// }
-//
-// export const showAvailableDiscounts = (orders: ServiceType[], id: ServiceType["id"]) => {
-//     const rabatProducts = orders.flatMap((service) => service.rabatProduct)
-//     const isRabat = !!rabatProducts.find((rabatProduct)=> rabatProduct.id == id)
-//     return  {
-//         backgroundColor: isRabat && orders.length < 2 ? "#50C878" : "",
-//         transition: "all ease-in-out 0.3s"
-//     }
-//
-// }
-//
-
-
-export const  checkArrays = (firstArray: number[], secondArray: number[]) => {
-    return firstArray.sort().toString() === secondArray.sort().toString()
+export const showRabatForService = (service_ID : ServiceTypeF["id"]) => {
+return rabatsData.filter(({derivative_products_IDS})=>  {
+      const index = derivative_products_IDS.indexOf(service_ID)
+      if(index > -1) return [...derivative_products_IDS].splice(index,1)
+  })
 }

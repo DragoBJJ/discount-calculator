@@ -4,7 +4,7 @@ import {OrderList} from "@/app/calculator/components/OrderList";
 import {CompanyProvider} from "@/app/calculator/context/companyContext";
 import {SummaryOrder} from "@/app/calculator/components/SummaryOrder";
 import {companyData}  from "./data"
-import {ServiceTypeF} from "@/app/calculator/types";
+
 
 export default function About(){
     const servicesData = companyData.flatMap(({serviceData})=>serviceData)

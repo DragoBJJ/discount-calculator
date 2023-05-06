@@ -17,7 +17,7 @@
     }
 
     export type RabatType = {
-        rabat_type: "TV" | "ABONAMENT" | "DEKODER"
+        rabat_type: "TV_INTERNET" | "ABONAMENT_INTERNET" | "DEKODER_INTERNET_TELEWIZJA"
         price: {
             "2023": number,
             "2024": number,
