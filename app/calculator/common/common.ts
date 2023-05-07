@@ -1,5 +1,16 @@
-import {RabatType, ServiceTypeF} from "@/app/calculator/types";
+import {PriceYear, ServiceTypeF} from "@/app/calculator/types";
 import {rabatsData, servicesData} from "@/app/calculator/data";
+
+export const getServicesDataByYear = (year: PriceYear) => {
+    return  servicesData.map((data)=> {
+        return {
+            ...data,
+            price: data.price[year]
+        }
+    })
+}
+
+
 
 export const getSummaryPrice = (services: ServiceTypeF[])  => {
     if(!services.length) return
@@ -39,14 +50,13 @@ return rabatsData.filter(({derivative_products_IDS})=>  {
   })
 }
 
-export const get_not_discounted_services_ids = (services: ServiceTypeF[], currentRabat: RabatType) => {
-    const derivative_products_IDS =currentRabat.derivative_products_IDS
+export const get_not_discounted_services_ids = (services: ServiceTypeF[], derivative_products_IDS: number[]) => {
     const servicesIDS = services.map((service)=> service.id)
     return servicesIDS.filter((service)=> !derivative_products_IDS.includes(service))
 }
 
-export const get_not_discounted_services =(currentRabat: RabatType, services: ServiceTypeF[]) => {
-        const services_IDS = get_not_discounted_services_ids(services, currentRabat)
+export const get_not_discounted_services =(derivative_products_IDS: number[], services: ServiceTypeF[]) => {
+        const services_IDS = get_not_discounted_services_ids(services, derivative_products_IDS)
     let not_discounted_product = servicesData.filter((service)=> services_IDS.includes(service.id))
     const not_discounted_productF:ServiceTypeF[]  = not_discounted_product.map((product)=> {
         return {
@@ -57,7 +67,7 @@ export const get_not_discounted_services =(currentRabat: RabatType, services: Se
    return not_discounted_productF
 }
 
-export const calculate_not_discounted_products = (currentRabat: RabatType, services: ServiceTypeF[]) => {
-  const  not_discounted_productF =  get_not_discounted_services(currentRabat, services)
+export const calculate_not_discounted_products = (derivative_products_IDS: number[], services: ServiceTypeF[]) => {
+  const  not_discounted_productF =  get_not_discounted_services(derivative_products_IDS, services)
     return getSummaryPrice(not_discounted_productF)
 }

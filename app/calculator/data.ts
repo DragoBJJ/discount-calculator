@@ -70,12 +70,3 @@ export const rabatsData: RabatType[] = [
         derivative_products_IDS: [1,2,4]
     }
 ]
-
-export const companyData: CompanyData = [
-    {
-        ID: 1,
-        companyName: "AlexanderSpace",
-        companyOwner: "Alexander",
-        serviceData: servicesData
-    }
-]

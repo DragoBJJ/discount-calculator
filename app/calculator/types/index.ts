@@ -1,5 +1,5 @@
 
-
+export type PriceYear =  "2023" | "2024" | "2025"
     export type ServiceType = {
          id: number,
          name: string

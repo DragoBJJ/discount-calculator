@@ -17,7 +17,8 @@ export const SummaryOrder = memo<any>(() => {
         if(currentRabat) {
             // Calculation of discounted products
             setSummaryPrice(currentRabat.price["2023"])
-            const summary =calculate_not_discounted_products(currentRabat,services)
+            const {derivative_products_IDS} = currentRabat
+            const summary =calculate_not_discounted_products(derivative_products_IDS, services)
             if(summary) setSummaryPrice((prevState)=> prevState + summary.price)
             setRabatExist(!!currentRabat)
         } else {
