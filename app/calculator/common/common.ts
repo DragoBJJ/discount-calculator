@@ -39,12 +39,15 @@ return rabatsData.filter(({derivative_products_IDS})=>  {
   })
 }
 
-export const get_not_discounted_products =(currentRabat: RabatType, services: ServiceTypeF[]) => {
+export const get_not_discounted_services_ids = (services: ServiceTypeF[], currentRabat: RabatType) => {
     const derivative_products_IDS =currentRabat.derivative_products_IDS
     const servicesIDS = services.map((service)=> service.id)
-    const services_ID = servicesIDS.filter((service)=> !derivative_products_IDS.includes(service))
-    console.log("services_ID",services_ID)
-    let not_discounted_product = servicesData.filter((service)=> services_ID.includes(service.id))
+    return servicesIDS.filter((service)=> !derivative_products_IDS.includes(service))
+}
+
+export const get_not_discounted_services =(currentRabat: RabatType, services: ServiceTypeF[]) => {
+        const services_IDS = get_not_discounted_services_ids(services, currentRabat)
+    let not_discounted_product = servicesData.filter((service)=> services_IDS.includes(service.id))
     const not_discounted_productF:ServiceTypeF[]  = not_discounted_product.map((product)=> {
         return {
             ...product,
@@ -55,6 +58,6 @@ export const get_not_discounted_products =(currentRabat: RabatType, services: Se
 }
 
 export const calculate_not_discounted_products = (currentRabat: RabatType, services: ServiceTypeF[]) => {
-  const  not_discounted_productF =  get_not_discounted_products(currentRabat, services)
+  const  not_discounted_productF =  get_not_discounted_services(currentRabat, services)
     return getSummaryPrice(not_discounted_productF)
 }

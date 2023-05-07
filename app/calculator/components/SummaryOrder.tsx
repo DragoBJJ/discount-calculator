@@ -9,16 +9,17 @@ import {calculate_not_discounted_products, getCurrentRabat, getSummaryPrice} fro
 export const SummaryOrder = memo<any>(() => {
     const {services} = useCompanyContext()
     const [summaryPrice,setSummaryPrice] = useState< number>(0)
+    const [rabatExist, setRabatExist] = useState<boolean>(false)
 
 
     useEffect(() => {
         const {currentRabat} = getCurrentRabat(services)
-        console.log("currentRabat",currentRabat)
         if(currentRabat) {
             // Calculation of discounted products
             setSummaryPrice(currentRabat.price["2023"])
             const summary =calculate_not_discounted_products(currentRabat,services)
             if(summary) setSummaryPrice((prevState)=> prevState + summary.price)
+            setRabatExist(!!currentRabat)
         } else {
             // Calculation of products without discount
             const summary = getSummaryPrice(services)
