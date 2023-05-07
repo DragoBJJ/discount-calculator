@@ -15,10 +15,8 @@ import {showRabatForService} from "@/app/calculator/common/common";
              if(orders.some(service => service.id === id )) return
             setCompanyServices([...orders,  {id, name,price}])
             const success = showRabatForService(id)
-            console.log("success",success)
         }
 
-           // const isRabatStyle = showAvailableDiscounts(orders,id)
 
             return (
             <div id="service" className={c.service}  >

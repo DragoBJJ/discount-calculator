@@ -1,38 +1,30 @@
 "use client"
-import {memo, useCallback, useEffect, useState} from "react";
+import {memo, useEffect, useState} from "react";
 import c from "../../styles/variables.module.scss"
 import {useCompanyContext} from "@/app/calculator/context/companyContext";
-import {ServiceTypeF} from "@/app/calculator/types";
-import {getCurrentRabat} from "@/app/calculator/common/common";
+
+import {calculate_not_discounted_products, getCurrentRabat, getSummaryPrice} from "@/app/calculator/common/common";
+
 
 export const SummaryOrder = memo<any>(() => {
-    const {services, rabat, setRabat} = useCompanyContext()
-    const [summaryPrice,setSummaryPrice] = useState< number | undefined>(undefined)
+    const {services} = useCompanyContext()
+    const [summaryPrice,setSummaryPrice] = useState< number>(0)
 
-    const getSummaryPrice = useCallback(() => {
-        if(!services.length) return
-        return  services.reduce((acc, nextValue
-        )=> {
-            acc["price"] = acc["price"] || 0
-            acc["price"] += nextValue["price"]
-            return acc
-        }, {} as ServiceTypeF)
-    }, [services])
 
     useEffect(() => {
-        const currentRabat = getCurrentRabat(services)
-
+        const {currentRabat} = getCurrentRabat(services)
+        console.log("currentRabat",currentRabat)
         if(currentRabat) {
+            // Calculation of discounted products
             setSummaryPrice(currentRabat.price["2023"])
+            const summary =calculate_not_discounted_products(currentRabat,services)
+            if(summary) setSummaryPrice((prevState)=> prevState + summary.price)
         } else {
-            const normalPrice = getSummaryPrice()
-            if(normalPrice) setSummaryPrice(normalPrice.price)
+            // Calculation of products without discount
+            const summary = getSummaryPrice(services)
+            if(summary) setSummaryPrice(summary.price)
         }
-
-
-
-
-    }, [getSummaryPrice]);
+    }, [services]);
 
 
     return (
