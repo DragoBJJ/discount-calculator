@@ -1,4 +1,4 @@
-import {CompanyData, RabatType, ServiceType} from "@/app/calculator/types";
+import {RabatType, ServiceType} from "@/app/calculator/types";
 
 
 
@@ -49,7 +49,12 @@ export const rabatsData: RabatType[] = [
             "2024": 89,
             "2025": 99,
         },
-        derivative_products_IDS: [1,2]
+        derivative_products_IDS: [1,2],
+        bonus_product:  {
+            id: 4,
+            name: "Dekoder 4K",
+            price: 29
+        }
     },
     {
         rabat_type: "ABONAMENT_INTERNET",

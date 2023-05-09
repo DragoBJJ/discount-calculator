@@ -1,3 +1,4 @@
+import React from "react";
 
 export type PriceYear =  "2023" | "2024" | "2025"
     export type ServiceType = {
@@ -14,6 +15,7 @@ export type PriceYear =  "2023" | "2024" | "2025"
         id: number,
         name: string
         price:  number
+        activeServiceStyle?: React.CSSProperties
     }
 
     export type RabatType = {
@@ -24,6 +26,7 @@ export type PriceYear =  "2023" | "2024" | "2025"
             "2025": number,
         }
         derivative_products_IDS: number[]
+        bonus_product?: ServiceTypeF
     }
 
    export type CompanyData = {

@@ -2,25 +2,31 @@
 import {createContext, ReactNode, useContext, useState} from "react";
 import { ServiceTypeF} from "@/app/calculator/types";
 
-
-
 export type CompanyContextType = {
     services:  ServiceTypeF[] | []
-    setCompanyServices:(serviceData: ServiceTypeF[]) => void,
-    // rabat: RabatType,
-    // setRabat:  (value: (((prevState: RabatType) => RabatType) | RabatType)) => void
+    addNewService: (serviceData: ServiceTypeF) => void
+    activeServices: number[],
+    setActiveServices:  (value: number[]) => void
 }
 
 const CompanyContext = createContext<CompanyContextType | null>(null)
 
 
 export const CompanyProvider = ({children}: ReactNode) => {
-    const [companyServices,  setCompanyServices] = useState<ServiceTypeF[] | []>([])
-    // const [rabat, setRabat] = useState<RabatType>({rabatType: "NONE", rabatPrice: 0})
+    const [services,  setServices] = useState<ServiceTypeF[]>([])
+    const [activeServices, setActiveServices] = useState<number[]>([])
+
+     const addNewService = (newService: ServiceTypeF) => {
+         if(services.find(service => service.id  === newService.id)) return
+         setServices((prevState)=>[...prevState,newService])
+    }
+
     return  (
         <CompanyContext.Provider value={{
-            services: companyServices,
-            setCompanyServices,
+            services,
+            addNewService,
+            activeServices,
+            setActiveServices
         }}>
             {children}
         </CompanyContext.Provider>
@@ -32,3 +38,5 @@ export const useCompanyContext = () => {
     if(!context) throw  new Error("CompanyContext does not exist")
     return context
 }
+
+
