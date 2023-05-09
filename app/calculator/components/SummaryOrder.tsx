@@ -26,9 +26,9 @@ export const SummaryOrder = memo<any>(() => {
                     copy_derivative_products_IDS = [...derivative_products_IDS,currentRabat.bonus_product.id]
                     addNewService({
                         ...currentRabat.bonus_product,
-                        price: currentRabat.price["2023"],
                     })
                 }
+                console.log("currentRabat",currentRabat)
             const products_summary = calculate_not_discounted_products(copy_derivative_products_IDS, services)
             if (!products_summary) return
             setSummaryPrice((prevState)=> prevState + products_summary.price)

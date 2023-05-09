@@ -4,6 +4,11 @@ $bg-rabat-color: green;
 $hover-bg-service: #6495ED;
 
 
+@import "app/styles/mixins";
+
+
+
+
 .calculatorPage {
     display: flex;
   align-content: center;
@@ -32,8 +37,15 @@ $hover-bg-service: #6495ED;
   align-content: center;
   width: 240px;
   height: 80px;
-  border: 1px solid black;
-  border-radius: 1rem;
+
+  @include glas-effect;
+
+  background: rgba(255, 255, 255, 0.42);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(0px);
+  -webkit-backdrop-filter: blur(0px);
+  border: 1px solid rgba(255, 255, 255, 0.26);
 
 &:hover {
   background: $hover-bg-service;
@@ -75,16 +87,16 @@ $hover-bg-service: #6495ED;
 
 .orderList {
   display: flex;
-  overflow-y: scroll;
+  //overflow-y: scroll;
   width: 100%;
   height: 400px;
   padding: 1rem;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
-  border: 1px solid black;
-  border-radius: 1rem;
-  background-attachment: scroll;
+
+
+  @include glas-effect;
 }
 
 .summarySection {
@@ -99,7 +111,11 @@ $hover-bg-service: #6495ED;
   padding: 1rem;
   width: 100%;
   height: 100px;
-  border: 1px solid black;
   margin-top: 1rem;
-  border-radius: 1rem;
+
+  @include glas-effect;
+}
+
+.selectList {
+  @include glas-effect;
 }

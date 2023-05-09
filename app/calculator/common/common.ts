@@ -1,9 +1,9 @@
 import {PriceYear, ServiceTypeF} from "@/app/calculator/types";
-import {rabatsData, servicesData} from "@/app/calculator/database/data";
+import {discountData, AlexanderServicesData} from "@/app/calculator/database/data";
 import React from "react";
 
 export const getServicesDataByYear = (year: PriceYear) => {
-    return  servicesData.map((data)=> {
+    return  AlexanderServicesData.map((data)=> {
         return {
             ...data,
             price: data.price[year]
@@ -22,7 +22,7 @@ export const getSummaryPrice = (services: ServiceTypeF[])  => {
 }
 
 export const getCurrentRabat = (services : ServiceTypeF[]) => {
-   const currentDiscounts = rabatsData.filter(({derivative_products_IDS,rabat_type,price})=> {
+   const currentDiscounts = discountData.filter(({derivative_products_IDS,rabat_type,price})=> {
         const servicesIDS = services.map((service)=> service.id)
         const isRabat: boolean = derivative_products_IDS.every((id)=> servicesIDS.includes(id))
         return   isRabat &&  {
@@ -58,7 +58,7 @@ export const get_not_discounted_services_ids = (services: ServiceTypeF[], deriva
 export const get_not_discounted_services =(derivative_products_IDS: number[], services: ServiceTypeF[]) => {
         const services_IDS = get_not_discounted_services_ids(services, derivative_products_IDS)
     if(!services_IDS) return []
-    let not_discounted_product = servicesData.filter((service)=> services_IDS.includes(service.id))
+    let not_discounted_product = AlexanderServicesData.filter((service)=> services_IDS.includes(service.id))
     return  not_discounted_product.map((product)=> {
         return {
             ...product,

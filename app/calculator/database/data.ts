@@ -2,7 +2,7 @@ import {RabatType, ServiceType} from "@/app/calculator/types";
 
 
 
-export const servicesData: ServiceType[] = [
+export const AlexanderServicesData: ServiceType[] = [
     {
         id: 1,
         name: "Internet",
@@ -41,7 +41,7 @@ export const servicesData: ServiceType[] = [
     }
 ]
 
-export const rabatsData: RabatType[] = [
+export const discountData: RabatType[] = [
     {
         rabat_type: "TV_INTERNET",
         price: {
@@ -59,9 +59,9 @@ export const rabatsData: RabatType[] = [
     {
         rabat_type: "ABONAMENT_INTERNET",
         price: {
-            "2023": 79,
-            "2024": 89,
-            "2025": 99,
+            "2023": 64,
+            "2024": 64,
+            "2025": 64,
         },
         derivative_products_IDS: [1,3]
     },
