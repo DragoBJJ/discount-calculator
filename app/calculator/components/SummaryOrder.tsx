@@ -7,17 +7,18 @@ import {calculate_not_discounted_products, getCurrentRabat, getSummaryPrice} fro
 
 
 export const SummaryOrder = memo<any>(() => {
-    const {services ,addNewService, setActiveServices} = useCompanyContext()
-
+    const {services ,addNewService, setActiveServices, selectedYearData} = useCompanyContext()
+    console.log("selectedYearData",selectedYearData)
     const [summaryPrice,setSummaryPrice] = useState< number>(0)
 
 
     useEffect(() => {
-        const {currentRabat} = getCurrentRabat(services)
+        const {currentRabat} = getCurrentRabat(services,selectedYearData)
+        console.log("currentRabat",currentRabat)
         if(currentRabat) {
             // Calculation of discounted products
 
-                setSummaryPrice(currentRabat.price["2023"])
+                setSummaryPrice(currentRabat.price)
                 const {derivative_products_IDS} = currentRabat
                 let copy_derivative_products_IDS = derivative_products_IDS
             setActiveServices(derivative_products_IDS)
@@ -28,7 +29,6 @@ export const SummaryOrder = memo<any>(() => {
                         ...currentRabat.bonus_product,
                     })
                 }
-                console.log("currentRabat",currentRabat)
             const products_summary = calculate_not_discounted_products(copy_derivative_products_IDS, services)
             if (!products_summary) return
             setSummaryPrice((prevState)=> prevState + products_summary.price)

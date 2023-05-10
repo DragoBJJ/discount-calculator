@@ -21,37 +21,48 @@ export const getSummaryPrice = (services: ServiceTypeF[])  => {
     }, {} as ServiceTypeF)
 }
 
-export const getCurrentRabat = (services : ServiceTypeF[]) => {
+export const getServicesIDs = (services: ServiceTypeF[]) => services.map((service)=> service.id)
+
+export const getCurrentRabat = (services : ServiceTypeF[],selectedYearData: PriceYear) => {
    const currentDiscounts = discountData.filter(({derivative_products_IDS,rabat_type,price})=> {
-        const servicesIDS = services.map((service)=> service.id)
+        const servicesIDS = getServicesIDs(services)
         const isRabat: boolean = derivative_products_IDS.every((id)=> servicesIDS.includes(id))
-        return   isRabat &&  {
+        return isRabat &&  {
             isRabat,
             rabat_type,
             price
         }
     })
+
     const [winDiscount] = currentDiscounts.filter((discount)=> discount.bonus_product)
     const discount = winDiscount ? winDiscount : currentDiscounts[currentDiscounts.length - 1]
 
     return {
-        currentRabat: discount
+        currentRabat:  {
+            ...discount,
+            price:discount && discount.price[selectedYearData]
+        }
     }
 }
 
-// export const removeDuplicates = (services_IDs : number[]) =>  [...new Set(services_IDs)]
+export const removeDuplicates = (services_IDs : number[]) =>  [...new Set(services_IDs)]
 
-// export const showRabatForService = (service_ID : ServiceTypeF["id"]) => {
-// const  derivative_products = rabatsData.filter(({derivative_products_IDS})=> derivative_products_IDS.includes(service_ID))
-//     const elimination_of_my_id = derivative_products.flatMap((({derivative_products_IDS})=>  {
-//         return [...derivative_products_IDS].filter((id)=> id !== service_ID)
-//     }))
-//     return removeDuplicates(elimination_of_my_id)
-// }
+export const showRabatForService = (service_ID : ServiceTypeF["id"]) => {
+const  derivative_products = discountData.filter(({derivative_products_IDS})=> derivative_products_IDS.includes(service_ID))
+        return derivative_products.map((product)=> {
+            const elimination_of_my_id = product.derivative_products_IDS.filter((id)=> id !== service_ID)
+            return {
+                ...product,
+                derivative_products_IDS: elimination_of_my_id
+            }
+        })
+
+
+}
 
 export const get_not_discounted_services_ids = (services: ServiceTypeF[], derivative_products_IDS: number[]) => {
     if(!derivative_products_IDS) return []
-    const servicesIDS = services.map((service)=> service.id)
+    const servicesIDS = getServicesIDs(services)
     return servicesIDS.filter((service)=> !derivative_products_IDS.includes(service))
 }
 
@@ -78,5 +89,5 @@ export const getActiveDiscountStyle = (activeServices: number[], service_id: num
         backgroundColor: "#6495ED",
         transition: "all ease-in-out 0.3s"
     }
-    return activeServices.includes(service_id) ? style : {}
+    return activeServices && activeServices.includes(service_id) ? style : {}
 }

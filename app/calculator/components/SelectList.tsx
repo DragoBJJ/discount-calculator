@@ -7,7 +7,7 @@ import {PriceYear} from "@/app/calculator/types";
 export const SelectList = ()=> {
     const {setSelectedYearData} = useCompanyContext()
     return (
-        <Select onChange={(event )=> setSelectedYearData(event.currentTarget.value as PriceYear)}  placeholder='Select Year' size="md" maxWidth="150px" marginBottom="1rem" justifyContent="center" alignContent="center" className={style.selectList}>
+        <Select onChange={(event )=> setSelectedYearData(event.currentTarget.value as PriceYear)}   size="md" maxWidth="150px" marginBottom="1rem" justifyContent="center" alignContent="center" className={style.selectList}>
             {selectListData && selectListData.map((year,index)=> {
                 return (
                      <option onClick={(event)=> setSelectedYearData(event.currentTarget.value as PriceYear)}  key={year + index} value={year}>{year}</option>

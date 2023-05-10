@@ -4,6 +4,7 @@ import {MdAdd} from "react-icons/md"
 import c from "../../styles/variables.module.scss"
 import  {useCompanyContext} from "@/app/calculator/context/companyContext";
 import { ServiceTypeF} from "@/app/calculator/types";
+import {showRabatForService} from "@/app/calculator/common/common";
 
 
     export const Service = memo<ServiceTypeF>(( { id,name,price,activeServiceStyle}) => {
@@ -13,6 +14,8 @@ import { ServiceTypeF} from "@/app/calculator/types";
              if(services.some(service => service.id === id )) return
              addNewService({id,name,price})
         }
+        const discounts = showRabatForService(id)
+        console.log("discounts",discounts)
             return (
             <div id="service" className={c.service} style={activeServiceStyle} >
                 <h4 id="service_title" className={c.title}>{name}</h4>

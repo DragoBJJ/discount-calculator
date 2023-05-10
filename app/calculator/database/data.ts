@@ -17,8 +17,8 @@ export const AlexanderServicesData: ServiceType[] = [
         name: "Telewizja",
         price:  {
             "2023": 49,
-            "2024": 59,
-            "2025": 69
+            "2024": 49,
+            "2025": 59
         }
     },
     {
