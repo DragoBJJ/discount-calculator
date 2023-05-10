@@ -11,8 +11,7 @@ export const Service = ({id,name,price}: ServiceTypeF) => {
 
     const addServiceLogic = (id: ServiceTypeF["id"],name: ServiceTypeF["name"],price: ServiceTypeF["price"]) => {
         addNewService({id,name,price})
-        const currentDiscounts = showDiscountsForService(id)
-        setSuggestedDiscounts(currentDiscounts)
+        setSuggestedDiscounts(showDiscountsForService(id))
     }
 
     return (

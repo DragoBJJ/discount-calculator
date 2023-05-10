@@ -6,8 +6,6 @@ import c from "./style.module.scss"
 import {useCompanyContext} from "@/app/context/companyContext";
 import {getServicesDataByYear} from "@/app/common/common";
 
-
-
 export const Services = memo<>(() => {
     const {selectedYearData} =  useCompanyContext()
     const services = getServicesDataByYear(selectedYearData)

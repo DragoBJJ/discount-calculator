@@ -1,7 +1,5 @@
 import {DiscountType, ServiceType} from "@/app/types";
 
-
-
 export const AlexanderServicesData: ServiceType[] = [
     {
         id: 1,

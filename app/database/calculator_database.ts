@@ -11,4 +11,3 @@ export const companyData: CompanyData = [
         serviceData: AlexanderServicesData
     }
 ]
-export const servicesData = companyData.flatMap(({serviceData})=>serviceData)
