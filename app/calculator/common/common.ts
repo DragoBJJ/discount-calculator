@@ -33,12 +33,12 @@ export const getCurrentRabat = (services : ServiceTypeF[],selectedYearData: Pric
             price
         }
     })
-
+      if(!currentDiscounts.length)  return
     const [winDiscount] = currentDiscounts.filter((discount)=> discount.bonus_product)
     const discount = winDiscount ? winDiscount : currentDiscounts[currentDiscounts.length - 1]
 
     return {
-        currentRabat:  {
+        currentDiscount:  {
             ...discount,
             price:discount && discount.price[selectedYearData]
         }

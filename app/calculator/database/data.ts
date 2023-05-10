@@ -1,4 +1,4 @@
-import {RabatType, ServiceType} from "@/app/calculator/types";
+import {DiscountType, ServiceType} from "@/app/calculator/types";
 
 
 
@@ -41,7 +41,7 @@ export const AlexanderServicesData: ServiceType[] = [
     }
 ]
 
-export const discountData: RabatType[] = [
+export const discountData: DiscountType[] = [
     {
         rabat_type: "TV_INTERNET",
         price: {

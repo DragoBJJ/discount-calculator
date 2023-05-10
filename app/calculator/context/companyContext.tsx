@@ -1,6 +1,6 @@
 "use client"
 import {createContext, ReactNode, useContext, useState} from "react";
-import {PriceYear, ServiceType, ServiceTypeF} from "@/app/calculator/types";
+import {DiscountType, PriceYear, ServiceTypeF} from "@/app/calculator/types";
 
 export type CompanyContextType = {
     services:  ServiceTypeF[] | []
@@ -9,6 +9,8 @@ export type CompanyContextType = {
     setActiveServices:  (value: number[]) => void,
     selectedYearData: PriceYear,
     setSelectedYearData: (PriceYear: PriceYear) => void,
+    suggestedDiscounts:DiscountType[],
+    setSuggestedDiscounts: (discountType: DiscountType[]) => void,
 }
 
 const CompanyContext = createContext<CompanyContextType | null>(null)
@@ -19,6 +21,7 @@ export const CompanyProvider = ({children}: ReactNode) => {
     const [services,  setServices] = useState<ServiceTypeF[]>([])
     const [activeServices, setActiveServices] = useState<number[]>([])
     const [selectedYearData, setSelectedYearData] = useState<PriceYear>("2023")
+    const [suggestedDiscounts,setSuggestedDiscounts] = useState<DiscountType[]>([])
 
      const addNewService = (newService: ServiceTypeF) => {
          if(services.find(service => service.id  === newService.id)) return
@@ -32,7 +35,9 @@ export const CompanyProvider = ({children}: ReactNode) => {
             activeServices,
             setActiveServices,
             selectedYearData,
-            setSelectedYearData
+            setSelectedYearData,
+            suggestedDiscounts,
+            setSuggestedDiscounts
         }}>
             {children}
         </CompanyContext.Provider>

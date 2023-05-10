@@ -8,25 +8,24 @@ import {calculate_not_discounted_products, getCurrentRabat, getSummaryPrice} fro
 
 export const SummaryOrder = memo<any>(() => {
     const {services ,addNewService, setActiveServices, selectedYearData} = useCompanyContext()
-    console.log("selectedYearData",selectedYearData)
     const [summaryPrice,setSummaryPrice] = useState< number>(0)
 
 
     useEffect(() => {
-        const {currentRabat} = getCurrentRabat(services,selectedYearData)
-        console.log("currentRabat",currentRabat)
-        if(currentRabat) {
+        const isDiscountExist = getCurrentRabat(services,selectedYearData)
+        if(isDiscountExist) {
+            const {currentDiscount} = isDiscountExist
             // Calculation of discounted products
 
-                setSummaryPrice(currentRabat.price)
-                const {derivative_products_IDS} = currentRabat
+                setSummaryPrice(currentDiscount.price)
+                const {derivative_products_IDS} = currentDiscount
                 let copy_derivative_products_IDS = derivative_products_IDS
             setActiveServices(derivative_products_IDS)
 
-                if (currentRabat.bonus_product) {
-                    copy_derivative_products_IDS = [...derivative_products_IDS,currentRabat.bonus_product.id]
+                if (currentDiscount.bonus_product) {
+                    copy_derivative_products_IDS = [...derivative_products_IDS,currentDiscount.bonus_product.id]
                     addNewService({
-                        ...currentRabat.bonus_product,
+                        ...currentDiscount.bonus_product,
                     })
                 }
             const products_summary = calculate_not_discounted_products(copy_derivative_products_IDS, services)
@@ -38,7 +37,7 @@ export const SummaryOrder = memo<any>(() => {
             if(summary) setSummaryPrice(summary.price)
         }
 
-    }, [services]);
+    }, [addNewService, selectedYearData, services, setActiveServices]);
 
 
 

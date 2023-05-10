@@ -13,9 +13,10 @@ import {showRabatForService} from "@/app/calculator/common/common";
         const addServiceToOrder = (service_ID: ServiceTypeF["id"],name: ServiceTypeF["name"],price: ServiceTypeF["price"]) => {
              if(services.some(service => service.id === id )) return
              addNewService({id,name,price})
+            const discounts = showRabatForService(id)
+            console.log("discounts",discounts)
         }
-        const discounts = showRabatForService(id)
-        console.log("discounts",discounts)
+
             return (
             <div id="service" className={c.service} style={activeServiceStyle} >
                 <h4 id="service_title" className={c.title}>{name}</h4>

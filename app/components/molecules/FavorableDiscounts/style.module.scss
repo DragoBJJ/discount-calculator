@@ -1,0 +1,14 @@
+@import "app/styles/mixins";
+
+.favorableWrapper {
+  display: flex;
+  width: 100%;
+  min-height: 80px;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1rem;
+
+  @include glas-effect;
+
+
+}

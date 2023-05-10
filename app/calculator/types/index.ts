@@ -1,6 +1,7 @@
 import React from "react";
 
 export type PriceYear =  "2023" | "2024" | "2025"
+
     export type ServiceType = {
          id: number,
          name: string
@@ -18,7 +19,7 @@ export type PriceYear =  "2023" | "2024" | "2025"
         activeServiceStyle?: React.CSSProperties
     }
 
-    export type RabatType = {
+    export type DiscountType = {
         rabat_type: "TV_INTERNET" | "ABONAMENT_INTERNET" | "DEKODER_INTERNET_TELEWIZJA"
         price: {
             "2023": number,
