@@ -1,0 +1,15 @@
+@import "app/styles/mixins";
+
+.orderList {
+  display: flex;
+  margin-top: auto;
+  overflow-y: scroll;
+  width: 100%;
+  height: 400px;
+  padding: 1rem;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+
+  @include glas-effect;
+}

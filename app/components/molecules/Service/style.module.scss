@@ -1,0 +1,61 @@
+@import "app/styles/mixins";
+@import "app/styles/page.module";
+
+
+.service {
+  display: flex;
+  padding: 1rem;
+  margin-top: 0.5rem;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  width: 240px;
+  height: 80px;
+
+  @include glas-effect;
+
+  background: rgba(255, 255, 255, 0.42);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(0px);
+  -webkit-backdrop-filter: blur(0px);
+  border: 1px solid rgba(255, 255, 255, 0.26);
+
+  &:hover {
+    background: $hover-bg-service;
+    transition:  0.3s;
+  }
+
+  &:hover .title {
+    color: white
+  }
+  &:hover .price {
+    color: white
+  }
+
+  .title {
+    font-size: 16px;
+    margin-bottom: 4px;
+  }
+
+  .price {
+    color: black;
+  }
+  .buttonsWrapper {
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+    align-items: center;
+
+    .addButton {
+      cursor: pointer;
+      &:hover {
+        scale: 2;
+        transition: all ease-in-out 0.2s;
+        color: #fff;
+      }
+    }
+  }
+
+}
+

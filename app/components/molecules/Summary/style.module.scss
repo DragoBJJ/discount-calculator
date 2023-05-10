@@ -1,0 +1,12 @@
+
+@import "app/styles/mixins";
+
+.summaryOrder {
+  display: flex;
+  padding: 1rem;
+  width: 100%;
+  min-height: 80px;
+  margin-top: 1rem;
+
+  @include glas-effect;
+}

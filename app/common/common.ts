@@ -1,5 +1,5 @@
-import {PriceYear, ServiceTypeF} from "@/app/calculator/types";
-import {discountData, AlexanderServicesData} from "@/app/calculator/database/data";
+import {DiscountType, PriceYear, ServiceType, ServiceTypeF} from "@/app/types";
+import {discountData, AlexanderServicesData} from "@/app/database/data";
 import React from "react";
 
 export const getServicesDataByYear = (year: PriceYear) => {
@@ -47,7 +47,7 @@ export const getCurrentRabat = (services : ServiceTypeF[],selectedYearData: Pric
 
 export const removeDuplicates = (services_IDs : number[]) =>  [...new Set(services_IDs)]
 
-export const showRabatForService = (service_ID : ServiceTypeF["id"]) => {
+export const showDiscountsForService = (service_ID : ServiceTypeF["id"]) => {
 const  derivative_products = discountData.filter(({derivative_products_IDS})=> derivative_products_IDS.includes(service_ID))
         return derivative_products.map((product)=> {
             const elimination_of_my_id = product.derivative_products_IDS.filter((id)=> id !== service_ID)
@@ -90,4 +90,24 @@ export const getActiveDiscountStyle = (activeServices: number[], service_id: num
         transition: "all ease-in-out 0.3s"
     }
     return activeServices && activeServices.includes(service_id) ? style : {}
+}
+
+const getDerativeServices = (derivative_products_IDS: number[]) => {
+    // const  discountsIDs = removeDuplicates(discounts.flatMap(discount => discount.derivative_products_IDS))
+    return AlexanderServicesData.filter((service)=> derivative_products_IDS.includes(service.id))
+}
+
+export const getSentence = (derivative_products: ServiceType[],discountType: DiscountType["type"]) => {
+    let success = ""
+      success += derivative_products.map((service) => `${service.name}`)
+    return   {
+        title: `If you add ${success} yo will have ${discountType} discount`
+    }
+}
+
+export const showSuggestedDiscounts = (discounts: DiscountType[]) => {
+   return  discounts.flatMap((discount)=> {
+       const derivative_products = getDerativeServices(discount.derivative_products_IDS)
+       return getSentence(derivative_products, discount.type)
+   })
 }

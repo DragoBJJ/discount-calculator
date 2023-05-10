@@ -19,8 +19,10 @@ export type PriceYear =  "2023" | "2024" | "2025"
         activeServiceStyle?: React.CSSProperties
     }
 
+    export type BasicType = "TV_INTERNET" | "ABONAMENT_INTERNET" | "DEKODER_INTERNET_TELEWIZJA"
+
     export type DiscountType = {
-        rabat_type: "TV_INTERNET" | "ABONAMENT_INTERNET" | "DEKODER_INTERNET_TELEWIZJA"
+        type: BasicType
         price: {
             "2023": number,
             "2024": number,
@@ -29,6 +31,13 @@ export type PriceYear =  "2023" | "2024" | "2025"
         derivative_products_IDS: number[]
         bonus_product?: ServiceTypeF
     }
+
+export type DiscountReturnType = {currentDiscount: {price: number, type: BasicType, derivative_products_IDS: number[], bonus_product?: ServiceTypeF}}
+
+export type CalculateIfDiscountType = {
+    isDiscountExist :DiscountReturnType,
+    services: ServiceTypeF[]
+}
 
    export type CompanyData = {
         ID: number,

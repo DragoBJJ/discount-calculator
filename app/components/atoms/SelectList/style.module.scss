@@ -1,0 +1,5 @@
+@import "app/styles/mixins";
+
+.selectList {
+  @include glas-effect;
+}

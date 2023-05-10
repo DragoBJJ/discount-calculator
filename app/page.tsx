@@ -1,8 +1,9 @@
 "use client"
 
-import styles from './page.module.css'
 import {Inter} from   "@next/font/google"
-import { Link } from '@chakra-ui/next-js'
+import c from "@/app/styles/page.module.scss";
+import {CompanyProvider} from "@/app/context/companyContext";
+import {Calculator} from "@/app/components/organism/Calculator";
 
 const inter = Inter({
     subsets: ["latin"]
@@ -10,15 +11,10 @@ const inter = Inter({
 
 export default function Home() {
   return (
-    <main className={styles.main}>
-        <nav>
-            <ul>
-                <Link href="/calculator">
-                    Go to Calculator
-                </Link>
-            </ul>
-        </nav>
-     <h1 >Hello Next.js</h1>
-    </main>
+      <div  className={c.calculatorPage}>
+          <CompanyProvider>
+              <Calculator/>
+          </CompanyProvider>
+      </div>
   )
 }

@@ -1,5 +1,5 @@
-import {CompanyData, PriceYear} from "@/app/calculator/types";
-import {AlexanderServicesData} from "@/app/calculator/database/data";
+import {CompanyData, PriceYear} from "@/app/types";
+import {AlexanderServicesData} from "@/app/database/data";
 
 export const selectListData: PriceYear[] = ["2023","2024","2025"]
 

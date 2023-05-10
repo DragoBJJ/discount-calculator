@@ -1,8 +1,8 @@
 "use client"
-import style from "../../styles/variables.module.scss"
-import {useCompanyContext} from "@/app/calculator/context/companyContext";
-import {Service} from "@/app/calculator/components/Service";
-import {getActiveDiscountStyle} from "@/app/calculator/common/common";
+import style from "./style.module.scss"
+import {useCompanyContext} from "@/app/context/companyContext";
+import {Service} from "@/app/components/molecules/Service";
+import {getActiveDiscountStyle} from "@/app/common/common";
 
 
 export const OrderList = () => {
@@ -12,7 +12,7 @@ export const OrderList = () => {
         <div className={style.orderList}>
             {services ? services.map((service,index)=>  {
                 const activeServiceStyle = getActiveDiscountStyle(activeServices, service.id)
-               return  <Service key={index} {...service} activeServiceStyle={activeServiceStyle} />
+                return  <Service key={index} {...service} activeServiceStyle={activeServiceStyle} />
             }) : (<></>)
             }
         </div>

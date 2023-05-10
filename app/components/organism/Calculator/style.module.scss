@@ -1,0 +1,28 @@
+@import "app/styles/mixins";
+@import "app/styles/page.module";
+
+.summarySection {
+  margin-left: 4rem;
+  align-items: flex-start;
+  justify-content: space-around;
+  display: flex;
+  flex-direction: column;
+  width: 40%;
+}
+
+
+.calculatorWrapper {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 600px;
+}
+
+

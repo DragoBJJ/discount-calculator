@@ -1,21 +1,33 @@
 import {memo} from "react";
-import c from "./style.module.scss"
-import {useCompanyContext} from "@/app/calculator/context/companyContext";
+import {useCompanyContext} from "@/app/context/companyContext";
+import {showSuggestedDiscounts} from "@/app/common/common";
+import {useToast} from '@chakra-ui/react'
 
 type FavorableDiscountsType = {
 activeServices? : number[]
 }
 
+
 export const FavorableDiscounts = memo<FavorableDiscountsType>(()=> {
-    const {activeServices} = useCompanyContext()
-    console.log("activeServices",activeServices)
+     const {suggestedDiscounts,services} = useCompanyContext()
+    const toast = useToast()
+    const sentences =  showSuggestedDiscounts(suggestedDiscounts)
+     if(services.length > 1) return
     return (
-        <div className={c.favorableWrapper}>
-            {activeServices && activeServices.map((id)=> {
-             return (
-                 <p key={id}>{id}</p>
-             )
-            })}
+        <div>
+
+            {/*{sentences.length ? sentences.forEach((sentence,index)=> {*/}
+            {/* return (*/}
+            {/*     toast({*/}
+            {/*         position: "bottom-left",*/}
+            {/*         title: "Great !",*/}
+            {/*         variant: "left-accent",*/}
+            {/*         description: sentence.title,*/}
+            {/*         duration: 9000,*/}
+            {/*         isClosable: true,*/}
+            {/*     })*/}
+            {/* )*/}
+            {/*}): <></>}*/}
         </div>
     );
 })

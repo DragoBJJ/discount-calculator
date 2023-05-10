@@ -1,0 +1,13 @@
+@import "app/styles/mixins";
+@import "app/styles/page.module";
+
+
+.services {
+  display: flex;
+  width: 100%;
+  height: 400px;
+  flex-direction: column;
+  align-content: center;
+  border-radius: 1rem;
+  background: $bg-color;
+}
