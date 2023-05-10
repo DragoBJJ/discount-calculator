@@ -16,18 +16,18 @@ export const FavorableDiscounts = memo<FavorableDiscountsType>(()=> {
     return (
         <div>
 
-            {/*{sentences.length ? sentences.forEach((sentence,index)=> {*/}
-            {/* return (*/}
-            {/*     toast({*/}
-            {/*         position: "bottom-left",*/}
-            {/*         title: "Great !",*/}
-            {/*         variant: "left-accent",*/}
-            {/*         description: sentence.title,*/}
-            {/*         duration: 9000,*/}
-            {/*         isClosable: true,*/}
-            {/*     })*/}
-            {/* )*/}
-            {/*}): <></>}*/}
+            {sentences.length ? sentences.forEach((sentence,index)=> {
+             return (
+                 toast({
+                     position: "bottom-left",
+                     title: "Great !",
+                     variant: "left-accent",
+                     description: sentence.title,
+                     duration: 5000,
+                     isClosable: true,
+                 })
+             )
+            }): <></>}
         </div>
     );
 })
