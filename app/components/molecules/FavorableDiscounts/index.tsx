@@ -3,12 +3,9 @@ import {useCompanyContext} from "@/app/context/companyContext";
 import {showSuggestedDiscounts} from "@/app/common/common";
 import {useToast} from '@chakra-ui/react'
 
-type FavorableDiscountsType = {
-activeServices? : number[]
-}
 
 
-export const FavorableDiscounts = memo<FavorableDiscountsType>(()=> {
+export const FavorableDiscounts = (()=> {
      const {suggestedDiscounts,services} = useCompanyContext()
     const toast = useToast()
     const sentences =  showSuggestedDiscounts(suggestedDiscounts)
