@@ -2,13 +2,13 @@ import React, {memo} from "react";
 
 type HeaderType = {
     title: string
-    isLarge?: boolean
+    size?: string
     className?: string
 }
 
-export const Header = memo<HeaderType>(({title,isLarge,className}) => {
+export const Header = memo<HeaderType>(({title,size,className}) => {
 
     return (
-        <h3 className={className} style={{fontSize:  isLarge ? "18px": ""}}>{title}</h3>
+        <h3 className={className} style={{fontSize:  size ? size: "16px"}}>{title}</h3>
     )
 })

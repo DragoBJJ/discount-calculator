@@ -5,12 +5,12 @@ import {Service} from "@/app/components/molecules/Service";
 import {getActiveDiscountStyle} from "@/app/utils/discountsLogic";
 
 export const OrderList = () => {
-    const {services,activeServices} = useCompanyContext()
+    const {services,activeServices_IDs} = useCompanyContext()
 
     return (
         <div className={style.orderList}>
             {services ? services.map((service,index)=>  {
-                const activeServiceStyle = getActiveDiscountStyle(activeServices, service.id)
+                const activeServiceStyle = getActiveDiscountStyle(activeServices_IDs, service.id)
                 return  <Service key={index} {...service} activeServiceStyle={activeServiceStyle} />
             }) : (<></>)
             }

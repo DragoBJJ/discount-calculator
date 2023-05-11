@@ -6,10 +6,12 @@ import {calculatorLogic} from "@/app/utils/discountsLogic";
 import {Header} from "@/app/components/atoms/Header";
 import {AiOutlineDelete} from "react-icons/ai"
 import {IconButton} from "@/app/components/atoms/AddButton";
+import {useToast} from "@chakra-ui/react";
 
 export const SummaryOrder = (() => {
-    const {services ,addNewService, deleteAllServices , setActiveServices_IDS, selectedYearData} = useCompanyContext()
+    const {services ,addNewService, deleteAllServices,activeServices_IDs, setActiveServices_IDS, selectedYearData} = useCompanyContext()
     const [summaryPrice,setSummaryPrice] = useState< number>(0)
+    const toast = useToast()
 
    const calculatorLogicProps = useMemo(() =>  {
        return (
@@ -27,8 +29,23 @@ export const SummaryOrder = (() => {
         services,
         selectedYearData]);
 
-    useEffect(() => calculatorLogic(calculatorLogicProps)
+    useEffect(() =>  calculatorLogic(calculatorLogicProps)
     , [calculatorLogicProps]);
+
+
+    useEffect(() => {
+        if(activeServices_IDs.length) {
+            console.log("Elegancko")
+            toast({
+                title: 'Congratulations !',
+                description: "We just credited your discount !",
+                status: 'success',
+                duration: 3000,
+                isClosable: true,
+            })
+        }
+    }, [toast,activeServices_IDs]);
+
 
     return (
         <div className={c.summaryOrder}>

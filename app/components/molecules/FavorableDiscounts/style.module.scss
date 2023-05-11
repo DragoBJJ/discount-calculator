@@ -1,14 +1,28 @@
 @import "app/styles/mixins";
+@import "app/styles/variables.module";
 
 .favorableWrapper {
   display: flex;
+  flex-direction: column;
   width: 100%;
-  min-height: 80px;
-  justify-content: center;
+  height: 150px;
+   overflow-y: scroll;
+  justify-content: flex-start;
   align-items: center;
   margin-top: 1rem;
-
   @include glas-effect;
 
+
+  .sentenceWrapper {
+    margin-top: 10px;
+    border: 1px solid #6495ED;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    background: $hover-bg-service;
+  }
+
+  .title {
+    color: #fff;
+  }
 
 }

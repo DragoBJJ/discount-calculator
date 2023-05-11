@@ -29,7 +29,11 @@ export const CompanyProvider = ({children}: ReactNode) => {
          setServices((prevState)=>[...prevState,newService])
     }
 
-    const deleteAllServices = () => setServices([])
+    const deleteAllServices = () => {
+        setServices([])
+        setSuggestedDiscounts([])
+        setActiveServices_IDS([])
+    }
 
     return  (
         <CompanyContext.Provider value={{

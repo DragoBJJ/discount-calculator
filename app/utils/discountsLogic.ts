@@ -7,6 +7,7 @@ import {
 } from "@/app/utils/services";
 import React from "react";
 import {discountsData} from "@/app/model/data-model";
+import {useToast} from "@chakra-ui/react";
 
 
 const addBonusService = (derivative_products_IDS: number[],bonus_product: ServiceTypeF | undefined) => {
@@ -45,7 +46,6 @@ export const  calculateIfDiscountExist = ({isDiscountExist,services}: CalculateI
 }
 
 export const calculatorLogic = (cartLogic: ShoppingCartLogicType) => {
-
     const {services, setActiveServices_IDS ,setSummaryPrice ,selectedYearData ,addNewService} = cartLogic
 
     const isDiscountExist = getCurrentDiscount(services,selectedYearData)

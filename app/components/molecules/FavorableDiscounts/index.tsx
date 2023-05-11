@@ -1,31 +1,23 @@
-import {memo} from "react";
+
 import {useCompanyContext} from "@/app/hooks";
-import {useToast} from '@chakra-ui/react'
 import {showSuggestedDiscounts} from "@/app/utils/discountsLogic";
-
-
+import s from "./style.module.scss"
+import {Header} from "@/app/components/atoms/Header";
 
 export const FavorableDiscounts = (()=> {
-     const {suggestedDiscounts,services} = useCompanyContext()
-    const toast = useToast()
+     const {services, suggestedDiscounts} = useCompanyContext()
+
     const sentences =  showSuggestedDiscounts(suggestedDiscounts)
-     if(services.length > 1) return
+
     return (
-        <div>
-
-            {/*{sentences.length && sentences.forEach((sentence,index)=> {*/}
-            {/*  <div>*/}
-            {/*      toast({*/}
-
-            {/*      position: "bottom-left",*/}
-            {/*      title: "Great !",*/}
-            {/*      variant: "left-accent",*/}
-            {/*      description: sentence.title,*/}
-            {/*      duration: 5000,*/}
-            {/*      isClosable: true,*/}
-            {/*  })*/}
-            {/*  </div>*/}
-            {/*})}*/}
+        <div className={s.favorableWrapper}>
+            {services.length < 2 && sentences && sentences.map((sentence,index)=> {
+             return (
+                 <div key={index} className={s.sentenceWrapper}>
+                     <Header className={s.title} size="14px" title={sentence.title}  />
+                 </div>
+             )
+            })}
         </div>
     );
 })
