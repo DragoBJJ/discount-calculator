@@ -1,5 +1,5 @@
 import {DiscountType, PriceYear, ServiceType, ServiceTypeF} from "@/app/types";
-import {AlexanderServicesData, discountsData} from "@/app/database/data-model";
+import {AlexanderServicesData, discountsData} from "@/app/model/data-model";
 import {companyData} from "@/app/database/calculator_database";
 
 

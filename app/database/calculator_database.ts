@@ -1,5 +1,5 @@
 import {CompanyData, PriceYear} from "@/app/types";
-import {AlexanderServicesData} from "@/app/database/data-model";
+import {AlexanderServicesData} from "@/app/model/data-model";
 
 export const selectListData: PriceYear[] = ["2023","2024","2025"]
 

@@ -6,7 +6,7 @@ import {
     getSummaryPrice
 } from "@/app/utils/services";
 import React from "react";
-import {discountsData} from "@/app/database/data-model";
+import {discountsData} from "@/app/model/data-model";
 
 
 const addBonusService = (derivative_products_IDS: number[],bonus_product: ServiceTypeF | undefined) => {
