@@ -1,7 +1,7 @@
 import {memo} from "react";
 import {useCompanyContext} from "@/app/context/companyContext";
-import {showSuggestedDiscounts} from "@/app/common/common";
 import {useToast} from '@chakra-ui/react'
+import {showSuggestedDiscounts} from "@/app/utils/discountsLogic";
 
 
 

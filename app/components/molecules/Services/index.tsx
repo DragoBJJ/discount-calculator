@@ -4,7 +4,8 @@ import {memo} from "react";
 import {Service} from "@/app/components/molecules/Service";
 import c from "./style.module.scss"
 import {useCompanyContext} from "@/app/context/companyContext";
-import {getServicesDataByYear} from "@/app/common/common";
+import {getServicesDataByYear} from "@/app/utils/services";
+
 
 export const Services = memo<>(() => {
     const {selectedYearData} =  useCompanyContext()

@@ -2,7 +2,7 @@
 import { useEffect, useState} from "react";
 import c from  "./style.module.scss"
 import {useCompanyContext} from "@/app/context/companyContext";
-import {shoppingCartLogic} from "@/app/common/discountLogic";
+import {shoppingCartLogic} from "@/app/utils/discountsLogic";
 
 export const SummaryOrder = (() => {
     const {services ,addNewService, setActiveServices, selectedYearData} = useCompanyContext()

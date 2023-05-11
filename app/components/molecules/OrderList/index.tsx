@@ -2,7 +2,8 @@
 import style from "./style.module.scss"
 import {useCompanyContext} from "@/app/context/companyContext";
 import {Service} from "@/app/components/molecules/Service";
-import {getActiveDiscountStyle} from "@/app/common/common";
+import {getActiveDiscountStyle} from "@/app/utils/discountsLogic";
+
 
 
 export const OrderList = () => {
