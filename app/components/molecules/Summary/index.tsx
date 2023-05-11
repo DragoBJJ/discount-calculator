@@ -35,7 +35,6 @@ export const SummaryOrder = (() => {
 
     useEffect(() => {
         if(activeServices_IDs.length) {
-            console.log("Elegancko")
             toast({
                 title: 'Congratulations !',
                 description: "We just credited your discount !",
@@ -44,8 +43,7 @@ export const SummaryOrder = (() => {
                 isClosable: true,
             })
         }
-    }, [toast,activeServices_IDs]);
-
+    }, [activeServices_IDs]);
 
     return (
         <div className={c.summaryOrder}>
