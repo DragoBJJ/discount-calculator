@@ -48,6 +48,11 @@ export const  calculateIfDiscountExist = ({isDiscountExist,services}: CalculateI
 export const calculatorLogic = (cartLogic: ShoppingCartLogicType) => {
     const {services, setActiveServices_IDS ,setSummaryPrice ,selectedYearData ,addNewService} = cartLogic
 
+     if(!services.length) {
+         setSummaryPrice(0)
+         return
+     }
+
     const isDiscountExist = getCurrentDiscount(services,selectedYearData)
 
     if(isDiscountExist) {
