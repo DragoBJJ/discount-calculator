@@ -6,7 +6,7 @@ import {
     getSummaryPrice
 } from "@/app/utils/services";
 import React from "react";
-import {discountData} from "@/app/database/data";
+import {discountsData} from "@/app/database/data-model";
 
 
 const addBonusService = (derivative_products_IDS: number[],bonus_product: ServiceTypeF | undefined) => {
@@ -59,7 +59,7 @@ export const getActiveDiscountStyle = (activeServices: number[], service_id: num
 }
 
 export const getCurrentDiscount = (services : ServiceTypeF[],selectedYearData: PriceYear) => {
-    const currentDiscounts = discountData.filter(({derivative_products_IDS,rabat_type,price})=> {
+    const currentDiscounts = discountsData.filter(({derivative_products_IDS,rabat_type,price})=> {
         const servicesIDS = getServicesIDs(services)
         const isRabat: boolean = derivative_products_IDS.every((id)=> servicesIDS.includes(id))
         return isRabat &&  {

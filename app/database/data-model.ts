@@ -39,7 +39,7 @@ export const AlexanderServicesData: ServiceType[] = [
     }
 ]
 
-export const discountData: DiscountType[] = [
+export const discountsData: DiscountType[] = [
     {
         type: "TV_INTERNET",
         price: {

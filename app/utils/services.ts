@@ -1,5 +1,5 @@
 import {DiscountType, PriceYear, ServiceType, ServiceTypeF} from "@/app/types";
-import {AlexanderServicesData, discountData} from "@/app/database/data";
+import {AlexanderServicesData, discountsData} from "@/app/database/data-model";
 
 
 export const getServicesIDs = (services: ServiceTypeF[]) => services.map((service)=> service.id)
@@ -7,7 +7,7 @@ export const getServicesIDs = (services: ServiceTypeF[]) => services.map((servic
 export const removeDuplicates = (services_IDs : number[]) =>  [...new Set(services_IDs)]
 
 export const showDiscountsForService = (service_ID : ServiceTypeF["id"]) => {
-    const  derivative_products = discountData.filter(({derivative_products_IDS})=> derivative_products_IDS.includes(service_ID))
+    const  derivative_products = discountsData.filter(({derivative_products_IDS})=> derivative_products_IDS.includes(service_ID))
     return derivative_products.map((product)=> {
         const elimination_of_my_id = product.derivative_products_IDS.filter((id)=> id !== service_ID)
         return {
@@ -51,8 +51,7 @@ export const calculate_not_discounted_services = (derivative_products_IDS: numbe
 }
 
 export const getDerativeServices = (derivative_products_IDS: number[]) => {
-    // const  discountsIDs = removeDuplicates(discounts.flatMap(discount => discount.derivative_products_IDS))
-    return AlexanderServicesData.filter((service)=> derivative_products_IDS.includes(service.id))
+   return  AlexanderServicesData.filter((service)=> derivative_products_IDS.includes(service.id))
 }
 
 export const getSummaryPrice = (services: ServiceTypeF[])  => {
