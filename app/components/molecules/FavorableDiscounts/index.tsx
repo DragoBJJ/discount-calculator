@@ -1,5 +1,5 @@
 import {memo} from "react";
-import {useCompanyContext} from "@/app/context/companyContext";
+import {useCompanyContext} from "@/app/hooks";
 import {useToast} from '@chakra-ui/react'
 import {showSuggestedDiscounts} from "@/app/utils/discountsLogic";
 
@@ -13,18 +13,19 @@ export const FavorableDiscounts = (()=> {
     return (
         <div>
 
-            {sentences.length ? sentences.forEach((sentence,index)=> {
-             return (
-                 toast({
-                     position: "bottom-left",
-                     title: "Great !",
-                     variant: "left-accent",
-                     description: sentence.title,
-                     duration: 5000,
-                     isClosable: true,
-                 })
-             )
-            }): <></>}
+            {/*{sentences.length && sentences.forEach((sentence,index)=> {*/}
+            {/*  <div>*/}
+            {/*      toast({*/}
+
+            {/*      position: "bottom-left",*/}
+            {/*      title: "Great !",*/}
+            {/*      variant: "left-accent",*/}
+            {/*      description: sentence.title,*/}
+            {/*      duration: 5000,*/}
+            {/*      isClosable: true,*/}
+            {/*  })*/}
+            {/*  </div>*/}
+            {/*})}*/}
         </div>
     );
 })

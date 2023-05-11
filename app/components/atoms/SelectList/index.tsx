@@ -1,6 +1,6 @@
 import { Select } from '@chakra-ui/react'
 import style from "./style.module.scss"
-import {useCompanyContext} from "@/app/context/companyContext";
+import {useCompanyContext} from "@/app/hooks";
 import {PriceYear} from "@/app/types";
 
 import {selectListData} from "@/app/database/calculator_database"

@@ -41,21 +41,6 @@
   .price {
     color: black;
   }
-  .buttonsWrapper {
-    display: flex;
-    width: 100%;
-    justify-content: flex-end;
-    align-items: center;
-
-    .addButton {
-      cursor: pointer;
-      &:hover {
-        scale: 2;
-        transition: all ease-in-out 0.2s;
-        color: #fff;
-      }
-    }
-  }
 
 }
 

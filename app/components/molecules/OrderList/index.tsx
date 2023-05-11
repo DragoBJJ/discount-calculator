@@ -1,10 +1,8 @@
 "use client"
 import style from "./style.module.scss"
-import {useCompanyContext} from "@/app/context/companyContext";
+import {useCompanyContext} from "@/app/hooks";
 import {Service} from "@/app/components/molecules/Service";
 import {getActiveDiscountStyle} from "@/app/utils/discountsLogic";
-
-
 
 export const OrderList = () => {
     const {services,activeServices} = useCompanyContext()

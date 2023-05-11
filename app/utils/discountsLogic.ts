@@ -10,9 +10,9 @@ import {discountsData} from "@/app/model/data-model";
 
 
 const addBonusService = (derivative_products_IDS: number[],bonus_product: ServiceTypeF | undefined) => {
-    let new_derivative_products_IDS = [...derivative_products_IDS]
+    let new_derivative_products_IDS = derivative_products_IDS
     if(bonus_product) {
-         new_derivative_products_IDS = [...new_derivative_products_IDS, bonus_product.id]
+         new_derivative_products_IDS = [...derivative_products_IDS, bonus_product.id]
         return {new_derivative_products_IDS, newService: bonus_product}
     } else {
         return {new_derivative_products_IDS}
@@ -22,24 +22,42 @@ const addBonusService = (derivative_products_IDS: number[],bonus_product: Servic
 export const  calculateIfDiscountExist = ({isDiscountExist,services}: CalculateIfDiscountType) => {
     const {currentDiscount} = isDiscountExist
 
-    let summaryPrice = currentDiscount.price
+    let summaryPrice = 0
 
-    const {derivative_products_IDS, bonus_product} = currentDiscount
-    const {derivative_products_IDS: new_derivative_products_IDS, newService}  = addBonusService(derivative_products_IDS, bonus_product)
+    const {derivative_products_IDS, bonus_product, price} = currentDiscount
+    summaryPrice += price
+
+    const {new_derivative_products_IDS,newService} = addBonusService(derivative_products_IDS,bonus_product)
 
     const products_summary = calculate_not_discounted_services(new_derivative_products_IDS, services)
-     summaryPrice += products_summary ? products_summary.price : 0
+
+    if(products_summary) summaryPrice += products_summary.price
 
     return {derivative_products_IDS, summaryPrice, newService}
  }
 
-export const shoppingCartLogic = (services: ServiceTypeF[], selectedYearData: PriceYear):{newService: ServiceTypeF, summaryPrice: number, derivative_products_IDS: number[]} | {summaryPrice: number} => {
+  type ShoppingCartLogicType = {
+    services: ServiceTypeF[]
+      selectedYearData: PriceYear,
+      setSummaryPrice: (value: number) => void,
+      addNewService: (serviceData: ServiceTypeF) => void,
+      setActiveServices_IDS: (value: number[]) => void
+}
+
+export const calculatorLogic = (cartLogic: ShoppingCartLogicType) => {
+
+    const {services, setActiveServices_IDS ,setSummaryPrice ,selectedYearData ,addNewService} = cartLogic
+
     const isDiscountExist = getCurrentDiscount(services,selectedYearData)
+
     if(isDiscountExist) {
-        return  calculateIfDiscountExist({isDiscountExist, services})
+        const {derivative_products_IDS,summaryPrice, newService}  = calculateIfDiscountExist({isDiscountExist, services})
+        derivative_products_IDS.length && setActiveServices_IDS(derivative_products_IDS)
+        newService && addNewService(newService)
+        summaryPrice && setSummaryPrice(summaryPrice)
     } else {
         const summary = getSummaryPrice(services)
-        if(summary) return {summaryPrice: summary.price}
+        if(summary)  setSummaryPrice(summary.price)
     }
 }
 

@@ -1,0 +1,15 @@
+.buttonsWrapper {
+  display: flex;
+  width: 100%;
+  justify-content: flex-end;
+  align-items: flex-end;
+
+  .addButton {
+    cursor: pointer;
+    &:hover {
+      scale: 2;
+      transition: all ease-in-out 0.2s;
+      color: #fff;
+    }
+  }
+}
