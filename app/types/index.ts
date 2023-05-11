@@ -44,4 +44,4 @@ export type CalculateIfDiscountType = {
         companyName: string
         companyOwner: string
         serviceData: ServiceType[]
-    }[]
+    }

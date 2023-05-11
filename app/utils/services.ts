@@ -1,5 +1,6 @@
 import {DiscountType, PriceYear, ServiceType, ServiceTypeF} from "@/app/types";
 import {AlexanderServicesData, discountsData} from "@/app/database/data-model";
+import {companyData} from "@/app/database/calculator_database";
 
 
 export const getServicesIDs = (services: ServiceTypeF[]) => services.map((service)=> service.id)
@@ -18,7 +19,8 @@ export const showDiscountsForService = (service_ID : ServiceTypeF["id"]) => {
 }
 
 export const getServicesDataByYear = (year: PriceYear) => {
-    return  AlexanderServicesData.map((data)=> {
+    const {serviceData} = companyData
+    return  serviceData.map((data)=> {
         return {
             ...data,
             price: data.price[year]
