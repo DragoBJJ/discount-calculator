@@ -1,4 +1,4 @@
-import {CalculateIfDiscountType, DiscountType, PriceYear, ServiceTypeF} from "@/app/types";
+import {CalculateIfDiscountType, DiscountType, PriceYear, ServiceDatabaseType, ServiceTypeF} from "@/app/types";
 import {
     calculate_not_discounted_services,
     getDerativeServices, getSentence,
@@ -7,8 +7,6 @@ import {
 } from "@/app/utils/services";
 import React from "react";
 import {discountsData} from "@/app/model/data-model";
-import {useToast} from "@chakra-ui/react";
-
 
 const addBonusService = (derivative_products_IDS: number[],bonus_product: ServiceTypeF | undefined) => {
     let new_derivative_products_IDS = derivative_products_IDS
@@ -20,7 +18,7 @@ const addBonusService = (derivative_products_IDS: number[],bonus_product: Servic
     }
 }
 
-export const  calculateIfDiscountExist = ({isDiscountExist,services}: CalculateIfDiscountType) => {
+export const  calculateIfDiscountExist = ({isDiscountExist, services ,servicesDatabase ,selectedYearData}: CalculateIfDiscountType) => {
     const {currentDiscount} = isDiscountExist
 
     let summaryPrice = 0
@@ -30,7 +28,7 @@ export const  calculateIfDiscountExist = ({isDiscountExist,services}: CalculateI
 
     const {new_derivative_products_IDS,newService} = addBonusService(derivative_products_IDS,bonus_product)
 
-    const products_summary = calculate_not_discounted_services(new_derivative_products_IDS, services)
+    const products_summary = calculate_not_discounted_services(new_derivative_products_IDS, services , servicesDatabase ,selectedYearData)
 
     if(products_summary) summaryPrice += products_summary.price
 
@@ -38,25 +36,23 @@ export const  calculateIfDiscountExist = ({isDiscountExist,services}: CalculateI
  }
 
   type ShoppingCartLogicType = {
-    services: ServiceTypeF[]
-      selectedYearData: PriceYear,
+        services: ServiceTypeF[],
+      servicesDatabase: ServiceDatabaseType[],
+      selectedYearData: string,
       setSummaryPrice: (value: number) => void,
       addNewService: (serviceData: ServiceTypeF) => void,
       setActiveServices_IDS: (value: number[]) => void
 }
 
 export const calculatorLogic = (cartLogic: ShoppingCartLogicType) => {
-    const {services, setActiveServices_IDS ,setSummaryPrice ,selectedYearData ,addNewService} = cartLogic
+    const {services,servicesDatabase, setActiveServices_IDS ,setSummaryPrice ,selectedYearData ,addNewService} = cartLogic
 
-     if(!services.length) {
-         setSummaryPrice(0)
-         return
-     }
+     if(!services.length) return setSummaryPrice(0)
 
     const isDiscountExist = getCurrentDiscount(services,selectedYearData)
 
     if(isDiscountExist) {
-        const {derivative_products_IDS,summaryPrice, newService}  = calculateIfDiscountExist({isDiscountExist, services})
+        const {derivative_products_IDS,summaryPrice, newService}  = calculateIfDiscountExist({isDiscountExist, services , servicesDatabase ,selectedYearData})
         derivative_products_IDS.length && setActiveServices_IDS(derivative_products_IDS)
         newService && addNewService(newService)
         summaryPrice && setSummaryPrice(summaryPrice)
@@ -81,7 +77,7 @@ export const getActiveDiscountStyle = (activeServices: number[], service_id: num
     return activeServices && activeServices.includes(service_id) ? style : {}
 }
 
-export const getCurrentDiscount = (services : ServiceTypeF[],selectedYearData: PriceYear) => {
+export const getCurrentDiscount = (services : ServiceTypeF[],selectedYearData: string) => {
     const currentDiscounts = discountsData.filter(({derivative_products_IDS,rabat_type,price})=> {
         const servicesIDS = getServicesIDs(services)
         const isRabat: boolean = derivative_products_IDS.every((id)=> servicesIDS.includes(id))

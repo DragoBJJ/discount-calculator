@@ -1,7 +1,7 @@
 "use client"
 import {useEffect, useMemo, useState} from "react";
 import c from  "./style.module.scss"
-import {useCompanyContext} from "@/app/hooks";
+import {useCompanyContext, useServicesContext} from "@/app/hooks";
 import {calculatorLogic} from "@/app/utils/discountsLogic";
 import {Header} from "@/app/components/atoms/Header";
 import {AiOutlineDelete} from "react-icons/ai"
@@ -10,6 +10,8 @@ import {useToast} from "@chakra-ui/react";
 
 export const SummaryOrder = (() => {
     const {services ,addNewService, deleteAllServices,activeServices_IDs, setActiveServices_IDS, selectedYearData} = useCompanyContext()
+    const {servicesDatabase} = useServicesContext()
+
     const [summaryPrice,setSummaryPrice] = useState< number>(0)
     const toast = useToast()
 
@@ -20,13 +22,15 @@ export const SummaryOrder = (() => {
                addNewService,
                setSummaryPrice,
                services,
+               servicesDatabase,
                selectedYearData
            }
        )
-   }, [setActiveServices_IDS,
+   }, [ setActiveServices_IDS,
         addNewService,
         setSummaryPrice,
         services,
+         servicesDatabase,
         selectedYearData]);
 
     useEffect(() =>  calculatorLogic(calculatorLogicProps)

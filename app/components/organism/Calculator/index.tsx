@@ -1,23 +1,27 @@
 "use client";
-
 import c from "./style.module.scss"
 import {Services} from "@/app/components/molecules/Services";
 import {OrderList} from "@/app/components/molecules/OrderList";
-import {CompanyProvider} from "@/app/context/companyContext";
+import {OrderLogicProvider} from "@/app/context/OrderLogicContext";
 import {SummaryOrder} from "@/app/components/molecules/Summary";
 
 import {SelectList} from "@/app/components/atoms/SelectList";
 import {FavorableDiscounts} from "@/app/components/molecules/FavorableDiscounts";
-import {getServicesDataByYear} from "@/app/utils/services";
+import {InitialModal} from "@/app/components/molecules/Modal";
+import {ServicesProvider} from "@/app/context/ServicesContext";
 
-export  const Calculator =()=> {
-    const serviceData2023 = getServicesDataByYear("2023")
+export  const Calculator =() => {
+
     return (
-            <CompanyProvider>
+        <ServicesProvider>
+            <OrderLogicProvider>
                 <div className={c.calculatorWrapper}>
-                    <div className={c.wrapper}>
-                        <SelectList/>
-                        <Services services={serviceData2023} />
+                    <div className={c.servicesSection}>
+                       <div className={c.wrapper}>
+                           <SelectList/>
+                           <InitialModal/>
+                       </div>
+                        <Services />
                         <FavorableDiscounts />
                     </div>
                     <div className={c.summarySection}>
@@ -25,7 +29,8 @@ export  const Calculator =()=> {
                         <SummaryOrder/>
                     </div>
                 </div>
-            </CompanyProvider>
+            </OrderLogicProvider>
+        </ServicesProvider>
 
     )
 }

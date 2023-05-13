@@ -1,15 +1,20 @@
 "use client"
 
-import {memo} from "react";
 import {Service} from "@/app/components/molecules/Service";
 import c from "./style.module.scss"
-import {useCompanyContext} from "@/app/hooks";
+import {useCompanyContext, useServicesContext} from "@/app/hooks";
 import {getServicesDataByYear} from "@/app/utils/services";
 
 
-export const Services = memo<>(() => {
+export const Services = () => {
+
     const {selectedYearData} =  useCompanyContext()
-    const services = getServicesDataByYear(selectedYearData)
+    const {servicesDatabase} = useServicesContext()
+
+    const services = getServicesDataByYear(servicesDatabase, selectedYearData)
+
+
+    console.log("servicesDatabase",servicesDatabase)
 
     return (
         <div className={c.services}>
@@ -21,4 +26,4 @@ export const Services = memo<>(() => {
             }) : <></>}
         </div>
     )
-})
+}

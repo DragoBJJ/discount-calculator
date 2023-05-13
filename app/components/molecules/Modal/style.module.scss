@@ -1,0 +1,15 @@
+@import "app/styles/mixins";
+@import "app/styles/variables.module";
+
+
+.addButton {
+  display: flex;
+ margin-left: auto;
+  @include glas-effect;
+
+  &:hover {
+    background: $hover-bg-service;
+    transition:  0.3s;
+    color: white
+  }
+}

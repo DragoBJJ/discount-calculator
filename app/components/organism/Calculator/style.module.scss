@@ -10,7 +10,6 @@
   width: 40%;
 }
 
-
 .calculatorWrapper {
   display: flex;
   justify-content: center;
@@ -18,11 +17,15 @@
   height: 100%;
 }
 
-.wrapper {
+.servicesSection {
   display: flex;
   flex-direction: column;
   width: 100%;
   max-width: 600px;
+
+  .wrapper {
+    display: flex;
+  }
 }
 
 

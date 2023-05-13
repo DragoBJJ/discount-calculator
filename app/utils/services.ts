@@ -1,7 +1,6 @@
-import {DiscountType, PriceYear, ServiceType, ServiceTypeF} from "@/app/types";
-import {AlexanderServicesData, discountsData} from "@/app/model/data-model";
-import {companyData} from "@/app/database/calculator_database";
-
+import {DiscountType, PriceYear, ServiceDatabaseType, ServiceTypeF} from "@/app/types";
+import {discountsData} from "@/app/model/data-model";
+import {AlexanderServicesData} from "@/app/database/calculator_database";
 
 export const getServicesIDs = (services: ServiceTypeF[]) => services.map((service)=> service.id)
 
@@ -18,15 +17,16 @@ export const showDiscountsForService = (service_ID : ServiceTypeF["id"]) => {
     })
 }
 
-export const getServicesDataByYear = (year: PriceYear) => {
-    const {serviceData} = companyData
-    return  serviceData.map((data)=> {
+export const getServicesDataByYear = (servicesDatabase:ServiceDatabaseType[], year: string) => {
+    return servicesDatabase.map((data)=> {
         return {
             ...data,
             price: data.price[year]
         }
     })
+
 }
+
 
 export const get_not_discounted_services_ids = (services: ServiceTypeF[], derivative_products_IDS: number[]) => {
     if(!derivative_products_IDS) return []
@@ -34,20 +34,20 @@ export const get_not_discounted_services_ids = (services: ServiceTypeF[], deriva
     return servicesIDS.filter((service)=> !derivative_products_IDS.includes(service))
 }
 
-export const get_not_discounted_services =(derivative_products_IDS: number[], services: ServiceTypeF[]) => {
+export const get_not_discounted_services =(derivative_products_IDS: number[], services: ServiceTypeF[] ,servicesDatabase: ServiceTypeF[]) => {
     const services_IDS = get_not_discounted_services_ids(services, derivative_products_IDS)
     if(!services_IDS) return []
-    let not_discounted_product = AlexanderServicesData.filter((service)=> services_IDS.includes(service.id))
-    return  not_discounted_product.map((product)=> {
-        return {
-            ...product,
-            price: product.price["2023"]
-        }
-    })
+    return  servicesDatabase.filter((service)=> services_IDS.includes(service.id))
 }
 
-export const calculate_not_discounted_services = (derivative_products_IDS: number[], services: ServiceTypeF[]) => {
-    const  not_discounted_productsF = get_not_discounted_services(derivative_products_IDS, services)
+export const calculate_not_discounted_services = (derivative_products_IDS: number[], services: ServiceTypeF[],servicesDatabase: ServiceDatabaseType[],selectedYearData: string) => {
+    const  servicesWithCorrectYear = servicesDatabase.map((service)=>  {
+        return {
+            ...service,
+            price: service.price[selectedYearData as PriceYear]
+        }
+    })
+    const  not_discounted_productsF = get_not_discounted_services(derivative_products_IDS, services, servicesWithCorrectYear)
     if(not_discounted_productsF.length > 0) return getSummaryPrice(not_discounted_productsF)
     return null
 }
@@ -66,7 +66,7 @@ export const getSummaryPrice = (services: ServiceTypeF[])  => {
     }, {} as ServiceTypeF)
 }
 
-export const getSentence = (derivative_products: ServiceType[],discountType: DiscountType["type"]) => {
+export const getSentence = (derivative_products: ServiceDatabaseType[],discountType: DiscountType["type"]) => {
     let allServices = ""
     allServices += derivative_products.map((service) => ` ${service.name}`)
     return   {

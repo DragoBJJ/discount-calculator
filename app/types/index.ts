@@ -2,14 +2,10 @@ import React from "react";
 
 export type PriceYear =  "2023" | "2024" | "2025"
 
-    export type ServiceType = {
+    export type ServiceDatabaseType = {
          id: number,
          name: string
-        price: {
-            "2023": number,
-            "2024": number,
-            "2025": number,
-        }
+        price:  Record<PriceYear | string, number>
     }
 
     export type ServiceTypeF = {
@@ -19,29 +15,27 @@ export type PriceYear =  "2023" | "2024" | "2025"
         activeServiceStyle?: React.CSSProperties
     }
 
-    export type BasicType = "TV_INTERNET" | "ABONAMENT_INTERNET" | "DEKODER_INTERNET_TELEWIZJA"
+    export type BasicDiscountType = "TV_INTERNET" | "ABONAMENT_INTERNET" | "DEKODER_INTERNET_TELEWIZJA"
 
     export type DiscountType = {
-        type: BasicType
-        price: {
-            "2023": number,
-            "2024": number,
-            "2025": number,
-        }
+        type: BasicDiscountType,
+        price: Record<PriceYear, number>,
         derivative_products_IDS: number[]
         bonus_product?: ServiceTypeF
     }
 
-export type DiscountReturnType = {currentDiscount: {price: number, type: BasicType, derivative_products_IDS: number[], bonus_product?: ServiceTypeF}}
+export type DiscountReturnType = {currentDiscount: {price: number, type: BasicDiscountType, derivative_products_IDS: number[], bonus_product?: ServiceTypeF}}
 
 export type CalculateIfDiscountType = {
     isDiscountExist :DiscountReturnType,
     services: ServiceTypeF[]
+    servicesDatabase: ServiceDatabaseType[],
+    selectedYearData: string
 }
 
    export type CompanyData = {
-        ID: number,
+        companyID: number,
         companyName: string
         companyOwner: string
-        serviceData: ServiceType[]
+        servicesDatabase: ServiceDatabaseType[]
     }

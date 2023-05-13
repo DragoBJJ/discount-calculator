@@ -1,27 +1,27 @@
 "use client"
 import {createContext, ReactNode, useState} from "react";
-import {DiscountType, PriceYear, ServiceTypeF} from "@/app/types";
+import {DiscountType, ServiceTypeF} from "@/app/types";
 
-export type CompanyContextType = {
+export type OrderLogicContextType = {
     services:  ServiceTypeF[] | []
     addNewService: (serviceData: ServiceTypeF) => void
     deleteAllServices: () => void,
     activeServices_IDs: number[],
     setActiveServices_IDS:  (value: number[]) => void,
-    selectedYearData: PriceYear,
-    setSelectedYearData: (PriceYear: PriceYear) => void,
+    selectedYearData: string,
+    setSelectedYearData: (PriceYear: string) => void,
     suggestedDiscounts:DiscountType[],
     setSuggestedDiscounts: (discountType: DiscountType[]) => void,
 }
 
-export const CompanyContext = createContext<CompanyContextType | null>(null)
+export const OrderLogicContext = createContext<OrderLogicContextType | null>(null)
 
-export const CompanyProvider = ({children}: ReactNode) => {
+export const OrderLogicProvider = ({children}: ReactNode) => {
 
     const [services,  setServices] = useState<ServiceTypeF[]>([])
 
     const [activeServices_IDs, setActiveServices_IDS] = useState<number[]>([])
-    const [selectedYearData, setSelectedYearData] = useState<PriceYear>("2023")
+    const [selectedYearData, setSelectedYearData] = useState<string>("2023")
     const [suggestedDiscounts,setSuggestedDiscounts] = useState<DiscountType[]>([])
 
      const addNewService = (newService: ServiceTypeF) => {
@@ -36,7 +36,7 @@ export const CompanyProvider = ({children}: ReactNode) => {
     }
 
     return  (
-        <CompanyContext.Provider value={{
+        <OrderLogicContext.Provider value={{
             services,
             addNewService,
             activeServices_IDs,
@@ -48,7 +48,7 @@ export const CompanyProvider = ({children}: ReactNode) => {
             deleteAllServices
         }}>
             {children}
-        </CompanyContext.Provider>
+        </OrderLogicContext.Provider>
     )
 }
 

@@ -1,15 +1,19 @@
 @import "app/styles/mixins";
+@import "app/styles/variables.module";
+
 
 .orderList {
   display: flex;
   margin-top: auto;
-  overflow-y: scroll;
   width: 100%;
+  overflow-y: scroll;
   height: 400px;
   padding: 1rem;
   flex-direction: column;
   justify-content: flex-start;
-  align-items: flex-start;
 
-  @include glas-effect;
+  background: rgba(255, 255, 255, 0.10);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.26)
+
 }
