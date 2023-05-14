@@ -14,7 +14,6 @@ import s from "./style.module.scss"
 import {useServicesContext} from "@/app/hooks";
 import {PriceYear, ServiceDatabaseType} from "@/app/types";
 
-
 export type ModalType = {
     name: string
     price: number
@@ -23,7 +22,7 @@ export type ModalType = {
 
 export const  InitialModal =() => {
     const { isOpen, onOpen, onClose, } = useDisclosure()
-    const {servicesDatabase, addNewServicesToDatabase} = useServicesContext()
+    const {servicesDatabase,addNewYearToList , addNewServicesToDatabase} = useServicesContext()
 
     const [modalData, setModalData] = useState<ModalType>(null)
 
@@ -46,7 +45,8 @@ export const  InitialModal =() => {
             name: modalData.name,
             price:  newPrice
         }
-         addNewServicesToDatabase([...servicesDatabase, newService])
+         addNewServicesToDatabase(newService)
+         addNewYearToList(modalData.year)
          setModalData(null)
          onClose()
     }

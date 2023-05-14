@@ -13,7 +13,6 @@ export const Services = () => {
 
     const services = getServicesDataByYear(servicesDatabase, selectedYearData)
 
-
     return (
         <div className={c.services}>
             {services ? services.map((service,index)=> {

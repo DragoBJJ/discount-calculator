@@ -1,5 +1,6 @@
-import {CompanyData, PriceYear, ServiceDatabaseType} from "@/app/types";
-export const selectListData: PriceYear[] = ["2023","2024","2025"]
+import {CompanyData, ServiceDatabaseType} from "@/app/types";
+
+export const selectYearData: string[] = ["2023","2024","2025"]
 
 export const AlexanderServicesData: ServiceDatabaseType[] = [
     {

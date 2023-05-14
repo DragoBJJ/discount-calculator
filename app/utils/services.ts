@@ -19,10 +19,11 @@ export const showDiscountsForService = (service_ID : ServiceTypeF["id"]) => {
 
 export const getServicesDataByYear = (servicesDatabase:ServiceDatabaseType[], year: string) => {
     if(!servicesDatabase) return
-    return servicesDatabase.map((data)=> {
+    const servicesWithCorrectYear = servicesDatabase.filter((data)=> data.price[year])
+    return servicesWithCorrectYear.map((service)=> {
         return {
-            ...data,
-            price: data.price[year]
+            ...service,
+            price: service.price[year]
         }
     })
 
