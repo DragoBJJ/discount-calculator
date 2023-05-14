@@ -8,6 +8,15 @@ export type PriceYear =  "2023" | "2024" | "2025"
         price:  Record<PriceYear | string, number>
     }
 
+export type ShoppingCartLogicType = {
+    services: ServiceTypeF[],
+    servicesDatabase: ServiceDatabaseType[],
+    selectedYearData: string,
+    setSummaryPrice: (value: number) => void,
+    addNewService: (serviceData: ServiceTypeF) => void,
+    setActiveServices_IDS: (value: number[]) => void
+}
+
     export type ServiceTypeF = {
         id: number,
         name: string

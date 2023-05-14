@@ -1,7 +1,7 @@
 import {ServiceTypeF} from "@/app/types";
 import {MdOutlineAdd} from "react-icons/md"
 import c from "./style.module.scss"
-import {useCompanyContext} from "@/app/hooks";
+import {useOrderLogicContext, useServicesContext} from "@/app/hooks";
 import {showDiscountsForService} from "@/app/utils/services";
 import {memo} from "react";
 import {Header} from "@/app/components/atoms/Header";
@@ -13,7 +13,7 @@ type ServiceComponentType = {
 } & ServiceTypeF
 
 export const Service = memo<ServiceComponentType>(({id,name,price,isAddButton,activeServiceStyle}: ServiceTypeF,) => {
-    const {addNewService, setSuggestedDiscounts} = useCompanyContext()
+    const {addNewService, setSuggestedDiscounts} = useOrderLogicContext()
 
 
     const addServiceLogic = (id: ServiceTypeF["id"],name: ServiceTypeF["name"],price: ServiceTypeF["price"]) => {

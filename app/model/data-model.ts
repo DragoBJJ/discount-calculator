@@ -1,6 +1,6 @@
-import {DiscountType, ServiceType} from "@/app/types";
+import {DiscountType} from "@/app/types";
 
-export const discountsData: DiscountType[] = [
+export const discountsModel: DiscountType[] = [
     {
         type: "TV_INTERNET",
         price: {

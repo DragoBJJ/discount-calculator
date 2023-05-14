@@ -1,12 +1,20 @@
-import {CalculateIfDiscountType, DiscountType, PriceYear, ServiceDatabaseType, ServiceTypeF} from "@/app/types";
+import React from "react";
+
+import {
+    CalculateIfDiscountType,
+    DiscountType,
+    ServiceDatabaseType,
+    ServiceTypeF,
+    ShoppingCartLogicType
+} from "@/app/types";
 import {
     calculate_not_discounted_services,
     getDerativeServices, getSentence,
     getServicesIDs,
     getSummaryPrice
 } from "@/app/utils/services";
-import React from "react";
-import {discountsData} from "@/app/model/data-model";
+
+import {discountsModel} from "@/app/model/data-model";
 
 const addBonusService = (derivative_products_IDS: number[],bonus_product: ServiceTypeF | undefined) => {
     let new_derivative_products_IDS = derivative_products_IDS
@@ -35,14 +43,6 @@ export const  calculateIfDiscountExist = ({isDiscountExist, services ,servicesDa
     return {derivative_products_IDS, summaryPrice, newService}
  }
 
-  type ShoppingCartLogicType = {
-        services: ServiceTypeF[],
-      servicesDatabase: ServiceDatabaseType[],
-      selectedYearData: string,
-      setSummaryPrice: (value: number) => void,
-      addNewService: (serviceData: ServiceTypeF) => void,
-      setActiveServices_IDS: (value: number[]) => void
-}
 
 export const calculatorLogic = (cartLogic: ShoppingCartLogicType) => {
     const {services,servicesDatabase, setActiveServices_IDS ,setSummaryPrice ,selectedYearData ,addNewService} = cartLogic
@@ -78,7 +78,7 @@ export const getActiveDiscountStyle = (activeServices: number[], service_id: num
 }
 
 export const getCurrentDiscount = (services : ServiceTypeF[],selectedYearData: string) => {
-    const currentDiscounts = discountsData.filter(({derivative_products_IDS,rabat_type,price})=> {
+    const currentDiscounts = discountsModel.filter(({derivative_products_IDS,rabat_type,price})=> {
         const servicesIDS = getServicesIDs(services)
         const isRabat: boolean = derivative_products_IDS.every((id)=> servicesIDS.includes(id))
         return isRabat &&  {

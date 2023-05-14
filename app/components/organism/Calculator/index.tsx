@@ -2,19 +2,17 @@
 import c from "./style.module.scss"
 import {Services} from "@/app/components/molecules/Services";
 import {OrderList} from "@/app/components/molecules/OrderList";
-import {OrderLogicProvider} from "@/app/context/OrderLogicContext";
 import {SummaryOrder} from "@/app/components/molecules/Summary";
 
 import {SelectList} from "@/app/components/atoms/SelectList";
 import {FavorableDiscounts} from "@/app/components/molecules/FavorableDiscounts";
 import {InitialModal} from "@/app/components/molecules/Modal";
-import {ServicesProvider} from "@/app/context/ServicesContext";
+import {CalculatorContextProvider} from "@/app/Providers/calculatorProvider";
 
 export  const Calculator =() => {
 
     return (
-        <ServicesProvider>
-            <OrderLogicProvider>
+       <CalculatorContextProvider>
                 <div className={c.calculatorWrapper}>
                     <div className={c.servicesSection}>
                        <div className={c.wrapper}>
@@ -29,8 +27,6 @@ export  const Calculator =() => {
                         <SummaryOrder/>
                     </div>
                 </div>
-            </OrderLogicProvider>
-        </ServicesProvider>
-
+       </CalculatorContextProvider>
     )
 }

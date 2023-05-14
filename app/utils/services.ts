@@ -1,5 +1,5 @@
 import {DiscountType, PriceYear, ServiceDatabaseType, ServiceTypeF} from "@/app/types";
-import {discountsData} from "@/app/model/data-model";
+import {discountsModel} from "@/app/model/data-model";
 import {AlexanderServicesData} from "@/app/database/calculator_database";
 
 export const getServicesIDs = (services: ServiceTypeF[]) => services.map((service)=> service.id)
@@ -7,7 +7,7 @@ export const getServicesIDs = (services: ServiceTypeF[]) => services.map((servic
 export const removeDuplicates = (services_IDs : number[]) =>  [...new Set(services_IDs)]
 
 export const showDiscountsForService = (service_ID : ServiceTypeF["id"]) => {
-    const  derivative_products = discountsData.filter(({derivative_products_IDS})=> derivative_products_IDS.includes(service_ID))
+    const  derivative_products = discountsModel.filter(({derivative_products_IDS})=> derivative_products_IDS.includes(service_ID))
     return derivative_products.map((product)=> {
         const elimination_of_my_id = product.derivative_products_IDS.filter((id)=> id !== service_ID)
         return {
@@ -18,6 +18,7 @@ export const showDiscountsForService = (service_ID : ServiceTypeF["id"]) => {
 }
 
 export const getServicesDataByYear = (servicesDatabase:ServiceDatabaseType[], year: string) => {
+    if(!servicesDatabase) return
     return servicesDatabase.map((data)=> {
         return {
             ...data,

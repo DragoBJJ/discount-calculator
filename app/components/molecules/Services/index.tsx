@@ -2,19 +2,17 @@
 
 import {Service} from "@/app/components/molecules/Service";
 import c from "./style.module.scss"
-import {useCompanyContext, useServicesContext} from "@/app/hooks";
+import {useOrderLogicContext, useServicesContext} from "@/app/hooks";
 import {getServicesDataByYear} from "@/app/utils/services";
 
 
 export const Services = () => {
 
-    const {selectedYearData} =  useCompanyContext()
-    const {servicesDatabase} = useServicesContext()
+    const { servicesDatabase} =  useServicesContext()
+    const {selectedYearData} = useOrderLogicContext()
 
     const services = getServicesDataByYear(servicesDatabase, selectedYearData)
 
-
-    console.log("servicesDatabase",servicesDatabase)
 
     return (
         <div className={c.services}>
